@@ -3,6 +3,7 @@ package shopping.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shopping.domain.ProductIdNameResponse;
 import shopping.domain.ProductIdResponse;
 import shopping.domain.ProductMsgResponse;
 import shopping.entity.Product;
@@ -14,8 +15,13 @@ import java.util.Random;
 @Transactional
 @Service
 public class ProductService {
+
+    private final ProductRepository productRepository;
+
     @Autowired
-    private ProductRepository productRepository;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     // 생성, 수정, 삭제
 
@@ -43,10 +49,18 @@ public class ProductService {
         Long tmpId = rand.nextLong(100000) + 1;
         Product newProduct = new Product(tmpId, productName, 0, null);
 
-        products.add(newProduct);
+        productRepository.save(newProduct);
         ProductIdResponse result = new ProductIdResponse(tmpId);
 
         return result;
+    }
+
+    public ProductIdNameResponse update(String productName, Product product) {
+        Product updateProduct = productRepository.findByName(productName);
+        updateProduct.setPrice(product.getPrice());
+        updateProduct.setImageUrl(product.getImageUrl());
+
+        return new ProductIdNameResponse(product.getId(), product.getName());
     }
 
     public ProductMsgResponse delete(String productName) {
