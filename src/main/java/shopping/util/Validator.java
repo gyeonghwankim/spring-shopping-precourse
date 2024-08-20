@@ -1,6 +1,7 @@
 package shopping.util;
 
 import org.jetbrains.annotations.Nullable;
+import org.springframework.web.client.RestClient;
 import shopping.domain.ProductMsgResponse;
 
 import java.util.regex.Matcher;
@@ -17,6 +18,24 @@ public class Validator {
         if (response != null) return response;
 
         //욕설
+        response = productNameBadWord(productName);
+        if(response != null) return response;
+
+        return null;
+    }
+
+    public static ProductMsgResponse productNameBadWord(String productName) {
+        RestClient restClient = RestClient.create();
+        String baseUrl = "https://www.purgomalum.com/service/containsprofanity?text=";
+//        https://www.purgomalum.com/service/containsprofanity?text=this is some test input
+        String result = restClient.get()
+                .uri(baseUrl + productName)
+                .retrieve()
+                .body(String.class);
+
+        if(result.equals("true")) {
+            return new ProductMsgResponse("허용하지 않는 비속어가 포함되어 있습니다.");
+        }
         return null;
     }
 
