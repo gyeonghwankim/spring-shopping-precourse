@@ -6,4 +6,8 @@ public class ProductMsgResponse {
     public ProductMsgResponse(String msg) {
         this.msg = msg;
     }
+
+    public String getMsg() {
+        return msg;
+    }
 }
