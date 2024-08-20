@@ -1,5 +1,8 @@
-package shopping.domain;
+package shopping.entity;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Product {
     private Long id;
     private String name;
