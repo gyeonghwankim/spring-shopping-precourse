@@ -16,25 +16,24 @@ class ValidatorTest {
         String expectedMsg = "허용하지 않는 비속어가 포함되어 있습니다.";
 
         //when
-        ProductMsgResponse response = Validator.productNameBadWord(productName);
+        ProductMsgResponse response = Validator.productNameValidator(productName);
 
         //then
-        assertThat(response).isNotNull();
-        assertThat(response.getMsg()).isEqualTo(expectedMsg);
+        assertThat(response.getMsg()).isEqualTo(Validator.MSG_CONTAIN_PROFANITY);
 
     }
 
     @Test
-    @DisplayName("비속어를 사용하지 않은 경우 Null을 리턴한다.")
+    @DisplayName("비속어를 사용하지 않은 경우 OK 메세지를 리턴한다.")
     void productNameLengthValidator_null() {
         //given
         String productName = "bin";
 
         //when
-        ProductMsgResponse response = Validator.productNameBadWord(productName);
+        ProductMsgResponse response = Validator.productNameValidator(productName);
 
         //then
-        assertThat(response).isNull();
+        assertThat(response.getMsg()).isEqualTo(Validator.MSG_OK);
     }
 
     @Test
@@ -42,11 +41,9 @@ class ValidatorTest {
     void productNameSuccessRegexValidator() {
         String prdName = "()아메리카노";
 
-        ProductMsgResponse response = Validator.productNameRegularExpression(prdName);
+        ProductMsgResponse response = Validator.productNameValidator(prdName);
 
-        String actual = response.getMsg();
-
-        assertThat(actual).isEqualTo("200 OK");
+        assertThat(response.getMsg()).isEqualTo(Validator.MSG_OK);
     }
 
     @Test
@@ -54,10 +51,8 @@ class ValidatorTest {
     void productNameFailRegexValidator() {
         String prdName = "!!!아메리카노!!!";
 
-        ProductMsgResponse response = Validator.productNameRegularExpression(prdName);
+        ProductMsgResponse response = Validator.productNameValidator(prdName);
 
-        String actual = response.getMsg();
-
-        assertThat(actual).isEqualTo("허용하지 않는 특수 문자가 포함되어 있습니다.");
+        assertThat(response.getMsg()).isEqualTo(Validator.MSG_SPECIAL_CHAR);
     }
 }

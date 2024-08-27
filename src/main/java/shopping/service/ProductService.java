@@ -8,6 +8,7 @@ import shopping.domain.ProductIdResponse;
 import shopping.domain.ProductMsgResponse;
 import shopping.entity.Product;
 import shopping.repository.ProductRepository;
+import shopping.util.Validator;
 
 import java.util.List;
 import java.util.Random;
@@ -33,6 +34,10 @@ public class ProductService {
         if (productName == null || productName.isEmpty()) {
             System.out.println("누락된 파라미터가 있습니다.");
             return new ProductIdResponse(0L);
+        }
+
+        if (Validator.productNameValidator(productName) != null) {
+//            return
         }
 
         List<Product> products = productRepository.findAll();
