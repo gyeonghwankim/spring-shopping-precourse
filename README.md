@@ -194,7 +194,13 @@ Given 상품 이름이 “비속어”가 포함됐을 때
 | PurgoMalum API | PurgoMalum API | 쇼핑몰에서  비속어  검증을  위해서  사용하는 API |
 
 ## 모델링
+* 클라이언트(Client): `회원 가입`하지 않은 사용자
+* 상품 관리자(Product Manager): 상품 판매를 목적으로 `회원 가입`한 사용자
+* 구매자(Buyer): 상품 구매를 목적으로 `회원 가입`한 사용자  
 <img width="310" alt="회원가입" src="https://github.com/user-attachments/assets/05f8adef-d629-448c-9934-6fe31e21f1d1">
+
+---- 
+*  비속어  정책: 상품의  이름에  `비속어`가  포함되지  않으면  `등록`이  가능하다.  
 <img width="490" alt="상품 등록" src="https://github.com/user-attachments/assets/cdc02c0b-8904-42ec-9f16-bd1925796aa3">
 
 
