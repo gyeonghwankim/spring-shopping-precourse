@@ -193,4 +193,10 @@ Given 상품 이름이 “비속어”가 포함됐을 때
 | 비속어 | Profanity | 사회적으로  부적절하거나  불쾌감을  줄  수  있는  언어 |
 | PurgoMalum API | PurgoMalum API | 쇼핑몰에서  비속어  검증을  위해서  사용하는 API |
 
+## 모델링
+<img width="310" alt="회원가입" src="https://github.com/user-attachments/assets/05f8adef-d629-448c-9934-6fe31e21f1d1">
+<img width="490" alt="상품 등록" src="https://github.com/user-attachments/assets/cdc02c0b-8904-42ec-9f16-bd1925796aa3">
+
+
+
 
